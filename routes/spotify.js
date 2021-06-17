@@ -128,10 +128,10 @@ router.get("/get-top", ensureAuthenticated, function (req, res) {
         rankingPosition: track.rankingPosition,
       }));
 
-      res.send(filtered_data);
+      res.render("app", { tracks: filtered_data });
     })
     .catch(function (error) {
-      res.send(error);
+      res.render(error);
     });
 });
 

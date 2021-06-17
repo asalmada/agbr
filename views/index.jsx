@@ -1,7 +1,7 @@
 var React = require("react");
 var DefaultLayout = require("./layouts/default");
 
-function HelloMessage(props) {
+function Home(props) {
   return (
     <DefaultLayout>
       <div>
@@ -11,4 +11,4 @@ function HelloMessage(props) {
   );
 }
 
-module.exports = HelloMessage;
+module.exports = Home;
