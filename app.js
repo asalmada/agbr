@@ -15,8 +15,9 @@ var spotifyRouter = require("./routes/spotify");
 var app = express();
 
 // view engine setup
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "jade");
+app.set("views", __dirname + "/views");
+app.set("view engine", "jsx");
+app.engine("jsx", require("express-react-views").createEngine());
 
 app.use(
   session({ secret: "keyboard cat", resave: true, saveUninitialized: true })
