@@ -3,10 +3,10 @@ const axios = require("axios");
 var passport = require("passport");
 var passportSpotify = require("passport-spotify");
 
+const utils = require("../utils");
+
 var SpotifyStrategy = passportSpotify.Strategy;
 var router = express.Router();
-
-var authCallbackPath = "/spotify/auth/callback";
 
 // Passport session setup.
 //   To support persistent login sessions, Passport needs to be able to
@@ -32,7 +32,7 @@ passport.use(
     {
       clientID: process.env.CLIENT_ID,
       clientSecret: process.env.CLIENT_SECRET,
-      callbackURL: "http://localhost:3000" + authCallbackPath,
+      callbackURL: utils.getSpotifyAuthCallbackURL(),
     },
     function (accessToken, refreshToken, expires_in, profile, done) {
       profile.accessToken = accessToken;
@@ -70,7 +70,7 @@ function ensureAuthenticated(req, res, next) {
 router.get(
   "/auth",
   passport.authenticate("spotify", {
-    scope: ["user-read-recently-played", "user-top-read", "user-read-private"],
+    scope: ["user-top-read", "user-read-private"],
     showDialog: true,
   })
 );
@@ -88,6 +88,7 @@ router.get(
 );
 
 router.get("/get-top", ensureAuthenticated, function (req, res) {
+  req.query;
   axios({
     method: "get",
     url: "https://api.spotify.com/v1/me/top/tracks",
@@ -95,12 +96,19 @@ router.get("/get-top", ensureAuthenticated, function (req, res) {
       Authorization: "Bearer " + req.session.passport.user.accessToken,
     },
     params: {
-      time_range: "long_term",
+      time_range: req.query.time_range ? req.query.time_range : "long_term",
       limit: "50",
     },
   })
     .then(function (response) {
-      tracks = response.data.items; //ok
+      tracks = response.data.items;
+
+      // Archieve the ranking position from the song
+      tracks.forEach((track, index) => {
+        track["rankingPosition"] = index + 1;
+      });
+
+      // Remove non Ariana Grande tracks
       const ariana_tracks = tracks.filter((track) => {
         let is_ariana = false;
         track.artists.forEach((artist) => {
@@ -110,11 +118,14 @@ router.get("/get-top", ensureAuthenticated, function (req, res) {
         });
         return is_ariana;
       });
+
+      // Filter only the desired data from Ariana's tracks
       const filtered_data = ariana_tracks.map((track) => ({
         name: track.name,
         url: track.external_urls["spotify"],
         album: track.album.name,
         image: track.album.images[0],
+        rankingPosition: track.rankingPosition,
       }));
 
       res.send(filtered_data);
@@ -125,4 +136,3 @@ router.get("/get-top", ensureAuthenticated, function (req, res) {
 });
 
 module.exports = router;
-// TODO MIDLEWARRE IS AUTH
