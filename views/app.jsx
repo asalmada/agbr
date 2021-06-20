@@ -75,13 +75,39 @@ function App(props) {
   return (
     <DefaultLayout>
       <div className="row">
-        <div className="col-md-6 col-lg-4 text-center" style={stylesheet.menu}>
+        <div
+          className="col-md-6 col-lg-4"
+          style={{ ...stylesheet.menu, textAlign: "right" }}
+        >
           <Button label={"TOP SONGS"} src={"/spotify/top-50"} />
         </div>
-        <div className="col-md-6 col-lg-4 text-center" style={stylesheet.menu}>
+
+        {/* MOBILE VERSION - TEXT ALIGN LEFT */}
+        <div
+          className="col-md-6 col-lg-4  d-lg-none"
+          style={{ ...stylesheet.menu, textAlign: "left" }}
+        >
           <Button label={"RECENTLY PLAYED"} src={"/spotify/recently-played"} />
         </div>
-        <div className="col-md-12 col-lg-4" style={stylesheet.menu}>
+
+        {/* DESKTOP VERSION - TEXT ALIGN CENTER */}
+        <div
+          className="col-md-6 col-lg-4 text-center d-none d-lg-block"
+          style={stylesheet.menu}
+        >
+          <Button label={"RECENTLY PLAYED"} src={"/spotify/recently-played"} />
+        </div>
+
+        {/* MOBILE VERSION - TEXT ALIGN CENTER IN A NEW ROW */}
+        <div className="col-md-12 col-lg-4 d-lg-none" style={stylesheet.menu}>
+          <Profile user={props.user} />
+        </div>
+
+        {/* DESKTOP VERSION - TEXT ALIGN RIGHT IN SAME ROW */}
+        <div
+          className="col-md-12 col-lg-4 d-none d-lg-block"
+          style={{ ...stylesheet.menu, display: "flex !important" }}
+        >
           <Profile user={props.user} />
         </div>
       </div>
@@ -91,6 +117,7 @@ function App(props) {
           <div className="col">
             <h2 className="text-center" style={stylesheet.pageTitle}>
               {highlightedTimeRange && "Top Songs"}
+              {!highlightedTimeRange && "Recently Played"}
             </h2>
           </div>
         </div>
@@ -156,7 +183,7 @@ function App(props) {
         )}
         {props.tracks.length > 0 &&
           props.tracks.map((track, index) => (
-            <div className="row" key={track.rankingPosition}>
+            <div className="row" key={index}>
               <div className="col">
                 <div className="card mb-3" style={stylesheet.card}>
                   <div className="row g-0">

@@ -8,7 +8,7 @@ const stylesheet = {
   },
   header: {
     height: "6.25rem",
-    background: '#00e642 url("/images/arianabg.png") center no-repeat',
+    background: '#00e540 url("/images/arianabg.png") center no-repeat',
     fontFamily: "'Gotham Bold', sans-serif",
     display: "flex",
     alignItems: "center",

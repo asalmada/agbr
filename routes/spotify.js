@@ -70,7 +70,7 @@ function ensureAuthenticated(req, res, next) {
 router.get(
   "/auth",
   passport.authenticate("spotify", {
-    scope: ["user-top-read", "user-read-private"],
+    scope: ["user-top-read", "user-read-recently-played", "user-read-private"],
     showDialog: true,
   })
 );
@@ -88,7 +88,6 @@ router.get(
 );
 
 router.get("/top-50", ensureAuthenticated, function (req, res) {
-  req.query;
   axios({
     method: "get",
     url: "https://api.spotify.com/v1/me/top/tracks",
@@ -101,12 +100,7 @@ router.get("/top-50", ensureAuthenticated, function (req, res) {
     },
   })
     .then(function (response) {
-      tracks = response.data.items;
-
-      // Archieve the ranking position from the song
-      tracks.forEach((track, index) => {
-        track["rankingPosition"] = index + 1;
-      });
+      let tracks = response.data.items;
 
       // Remove non Ariana Grande tracks
       const ariana_tracks = tracks.filter((track) => {
@@ -125,7 +119,6 @@ router.get("/top-50", ensureAuthenticated, function (req, res) {
         url: track.external_urls["spotify"],
         album: track.album.name,
         image: track.album.images[0],
-        rankingPosition: track.rankingPosition,
       }));
 
       const filtered_user_data = {
@@ -147,18 +140,54 @@ router.get("/top-50", ensureAuthenticated, function (req, res) {
 });
 
 router.get("/recently-played", ensureAuthenticated, function (req, res) {
-  const filtered_user_data = {
-    displayName: req.session.passport.user.displayName,
-    profileUrl: req.session.passport.user.profileUrl,
-    profileImgUrl: req.session.passport.user.photos[0].value,
-  };
+  axios({
+    method: "get",
+    url: "https://api.spotify.com/v1/me/player/recently-played",
+    headers: {
+      Authorization: "Bearer " + req.session.passport.user.accessToken,
+    },
+    params: {
+      limit: "50",
+    },
+  })
+    .then(function (response) {
+      let tracks = response.data.items.map((item) => item.track); // remove item.context
 
-  res.render("app", {
-    tracks: [],
-    user: filtered_user_data,
-    selectedTimeRange: req.query.time_range,
-    selectedPath: req.path,
-  });
+      // Remove non Ariana Grande tracks
+      const ariana_tracks = tracks.filter((track) => {
+        let is_ariana = false;
+        track.artists.forEach((artist) => {
+          if (artist.name === "Ariana Grande") {
+            is_ariana = true;
+          }
+        });
+        return is_ariana;
+      });
+
+      // Filter only the desired data from Ariana's tracks
+      const filtered_tracks_data = ariana_tracks.map((track) => ({
+        name: track.name,
+        url: track.external_urls["spotify"],
+        album: track.album.name,
+        image: track.album.images[0],
+      }));
+
+      const filtered_user_data = {
+        displayName: req.session.passport.user.displayName,
+        profileUrl: req.session.passport.user.profileUrl,
+        profileImgUrl: req.session.passport.user.photos[0].value,
+      };
+
+      res.render("app", {
+        tracks: filtered_tracks_data,
+        user: filtered_user_data,
+        selectedTimeRange: req.query.time_range,
+        selectedPath: req.path,
+      });
+    })
+    .catch(function (error) {
+      res.render(error);
+    });
 });
 
 module.exports = router;
