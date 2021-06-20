@@ -5,11 +5,11 @@ var Profile = require("./layouts/profile");
 
 const stylesheet = {
   menu: {
-    marginTop: "5vh",
+    marginTop: "2rem",
   },
   pageTitle: {
     fontSize: "calc(2.225rem + .9vw)",
-    margin: "5vh 0",
+    margin: "4rem 0",
   },
   card: {
     backgroundColor: "#181717",
@@ -20,6 +20,7 @@ const stylesheet = {
   cardBodyRanking: {
     display: "flex",
     alignItems: "center",
+    color: "#04E553",
   },
   cardBodyHorizontalAlign: {
     width: "100%",
@@ -37,7 +38,7 @@ const stylesheet = {
     fontFamily: "'Gotham Bold', sans-serif",
   },
   timeRangeRow: {
-    paddingBottom: "9vh",
+    paddingBottom: "3rem",
   },
   timeRange: {
     color: "#04E553",
@@ -73,14 +74,14 @@ function App(props) {
 
   return (
     <DefaultLayout>
-      <div className="row" style={stylesheet.menu}>
-        <div className="col text-center">
+      <div className="row">
+        <div className="col-md-6 col-lg-4 text-center" style={stylesheet.menu}>
           <Button label={"TOP SONGS"} src={"/spotify/top-50"} />
         </div>
-        <div className="col text-center">
+        <div className="col-md-6 col-lg-4 text-center" style={stylesheet.menu}>
           <Button label={"RECENTLY PLAYED"} src={"/spotify/recently-played"} />
         </div>
-        <div className="col text-center">
+        <div className="col-md-12 col-lg-4" style={stylesheet.menu}>
           <Profile user={props.user} />
         </div>
       </div>

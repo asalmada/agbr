@@ -7,9 +7,8 @@ const stylesheet = {
     fontFamily: "'Gotham Light', sans-serif",
   },
   header: {
-    height: "12vh",
-    background:
-      '#04E553 url("http://localhost:3000/images/arianabg.png") center no-repeat',
+    height: "6.25rem",
+    background: '#00e642 url("/images/arianabg.png") center no-repeat',
     fontFamily: "'Gotham Bold', sans-serif",
     display: "flex",
     alignItems: "center",
@@ -24,11 +23,7 @@ function DefaultLayout(props) {
   return (
     <html>
       <head>
-        <link href="http://fonts.cdnfonts.com/css/gotham" rel="stylesheet" />
-        <link
-          href="http://fonts.cdnfonts.com/css/gotham-bold"
-          rel="stylesheet"
-        />
+        <link href="/style/style.css" rel="stylesheet" />
         <title>My Ariana Stats - Powered by AGBR</title>
       </head>
       <body style={stylesheet.body}>
