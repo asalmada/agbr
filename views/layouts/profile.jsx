@@ -28,7 +28,7 @@ function Profile(props) {
   const shortDisplayName = props.user.displayName.split(" ")[0];
 
   return (
-    <div style={stylesheet.profile}>
+    <div style={{ ...stylesheet.profile, ...props.additionalStyle }}>
       <div style={stylesheet.horizontalAlign}>
         <div>
           <img

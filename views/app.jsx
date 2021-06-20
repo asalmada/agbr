@@ -75,8 +75,20 @@ function App(props) {
   return (
     <DefaultLayout>
       <div className="row">
+        {/* MOBILE VERSION - TEXT ALIGN RIGHT - PADDING */}
         <div
-          className="col-md-6 col-lg-4"
+          className="col-md-6 col-lg-4 d-lg-none"
+          style={{
+            ...stylesheet.menu,
+            textAlign: "right",
+            paddingRight: "4.5rem",
+          }}
+        >
+          <Button label={"TOP SONGS"} src={"/spotify/top-50"} />
+        </div>
+        {/* DESKTOP VERSION - TEXT ALIGN RIGHT */}
+        <div
+          className="col-md-6 col-lg-4 d-none d-lg-block"
           style={{ ...stylesheet.menu, textAlign: "right" }}
         >
           <Button label={"TOP SONGS"} src={"/spotify/top-50"} />
@@ -85,7 +97,10 @@ function App(props) {
         {/* MOBILE VERSION - TEXT ALIGN LEFT */}
         <div
           className="col-md-6 col-lg-4  d-lg-none"
-          style={{ ...stylesheet.menu, textAlign: "left" }}
+          style={{
+            ...stylesheet.menu,
+            textAlign: "left",
+          }}
         >
           <Button label={"RECENTLY PLAYED"} src={"/spotify/recently-played"} />
         </div>
@@ -106,9 +121,12 @@ function App(props) {
         {/* DESKTOP VERSION - TEXT ALIGN RIGHT IN SAME ROW */}
         <div
           className="col-md-12 col-lg-4 d-none d-lg-block"
-          style={{ ...stylesheet.menu, display: "flex !important" }}
+          style={stylesheet.menu}
         >
-          <Profile user={props.user} />
+          <Profile
+            user={props.user}
+            additionalStyle={{ flexDirection: "unset" }}
+          />
         </div>
       </div>
 

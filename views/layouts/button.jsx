@@ -13,7 +13,6 @@ const stylesheet = {
 function Button(props) {
   return (
     <a
-      type="button"
       className="btn btn-outline-success"
       href={props.src}
       style={stylesheet.button}
