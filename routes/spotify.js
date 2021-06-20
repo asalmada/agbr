@@ -83,11 +83,11 @@ router.get(
   "/auth/callback",
   passport.authenticate("spotify", { failureRedirect: "/login" }),
   function (req, res) {
-    res.redirect("/spotify/get-top");
+    res.redirect("/spotify/top-50");
   }
 );
 
-router.get("/get-top", ensureAuthenticated, function (req, res) {
+router.get("/top-50", ensureAuthenticated, function (req, res) {
   req.query;
   axios({
     method: "get",
@@ -120,7 +120,7 @@ router.get("/get-top", ensureAuthenticated, function (req, res) {
       });
 
       // Filter only the desired data from Ariana's tracks
-      const filtered_data = ariana_tracks.map((track) => ({
+      const filtered_tracks_data = ariana_tracks.map((track) => ({
         name: track.name,
         url: track.external_urls["spotify"],
         album: track.album.name,
@@ -128,11 +128,37 @@ router.get("/get-top", ensureAuthenticated, function (req, res) {
         rankingPosition: track.rankingPosition,
       }));
 
-      res.render("app", { tracks: filtered_data });
+      const filtered_user_data = {
+        displayName: req.session.passport.user.displayName,
+        profileUrl: req.session.passport.user.profileUrl,
+        profileImgUrl: req.session.passport.user.photos[0].value,
+      };
+
+      res.render("app", {
+        tracks: filtered_tracks_data,
+        user: filtered_user_data,
+        selectedTimeRange: req.query.time_range,
+        selectedPath: req.path,
+      });
     })
     .catch(function (error) {
       res.render(error);
     });
+});
+
+router.get("/recently-played", ensureAuthenticated, function (req, res) {
+  const filtered_user_data = {
+    displayName: req.session.passport.user.displayName,
+    profileUrl: req.session.passport.user.profileUrl,
+    profileImgUrl: req.session.passport.user.photos[0].value,
+  };
+
+  res.render("app", {
+    tracks: [],
+    user: filtered_user_data,
+    selectedTimeRange: req.query.time_range,
+    selectedPath: req.path,
+  });
 });
 
 module.exports = router;

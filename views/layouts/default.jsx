@@ -2,8 +2,21 @@ var React = require("react");
 
 const stylesheet = {
   body: {
-    backgroundColor: "black",
+    backgroundColor: "#181717",
     color: "white",
+    fontFamily: "'Gotham Light', sans-serif",
+  },
+  header: {
+    height: "12vh",
+    background:
+      '#04E553 url("http://localhost:3000/images/arianabg.png") center no-repeat',
+    fontFamily: "'Gotham Bold', sans-serif",
+    display: "flex",
+    alignItems: "center",
+  },
+  headerHorizontalAlign: {
+    width: "100%",
+    textAlign: "center",
   },
 };
 
@@ -11,15 +24,22 @@ function DefaultLayout(props) {
   return (
     <html>
       <head>
+        <link href="http://fonts.cdnfonts.com/css/gotham" rel="stylesheet" />
+        <link
+          href="http://fonts.cdnfonts.com/css/gotham-bold"
+          rel="stylesheet"
+        />
         <title>My Ariana Stats - Powered by AGBR</title>
       </head>
       <body style={stylesheet.body}>
-        <div>
-          <h1>My Ariana Stats</h1>
+        <div style={stylesheet.header}>
+          <div style={stylesheet.headerHorizontalAlign}>
+            <h1>My Ariana Stats</h1>
+          </div>
         </div>
         <div className="container">
-          <div class="row">
-            <div class="col">{props.children}</div>
+          <div className="row">
+            <div className="col">{props.children}</div>
           </div>
         </div>
         <link
