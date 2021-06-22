@@ -5,17 +5,17 @@ var Profile = require("./layouts/profile");
 
 const stylesheet = {
   menu: {
-    marginTop: "2rem",
+    marginTop: "1rem",
   },
   pageTitle: {
-    fontSize: "calc(2.225rem + .9vw)",
-    margin: "4rem 0",
+    margin: "1rem 0",
   },
   card: {
     backgroundColor: "#181717",
     color: "white",
     borderTop: "1px solid white",
     borderBottom: "1px solid white",
+    marginTop: "1rem",
   },
   cardBodyRanking: {
     display: "flex",
@@ -37,13 +37,11 @@ const stylesheet = {
     marginBottom: "0",
     fontFamily: "'Gotham Bold', sans-serif",
   },
-  timeRangeRow: {
-    paddingBottom: "3rem",
-  },
   timeRange: {
     color: "#04E553",
     textDecorationLine: "underline",
-    textUnderlineOffset: "10px",
+    textUnderlineOffset: "5px",
+    lineHeight: "34px",
   },
   songURL: {
     color: "#04E553",
@@ -77,18 +75,18 @@ function App(props) {
       <div className="row">
         {/* MOBILE VERSION - TEXT ALIGN RIGHT - PADDING */}
         <div
-          className="col-md-6 col-lg-4 d-lg-none"
+          className="col-6 col-sm-4 d-sm-none"
           style={{
             ...stylesheet.menu,
             textAlign: "right",
-            paddingRight: "4.5rem",
+            paddingRight: "2.5rem",
           }}
         >
           <Button label={"TOP SONGS"} src={"/spotify/top-50"} />
         </div>
         {/* DESKTOP VERSION - TEXT ALIGN RIGHT */}
         <div
-          className="col-md-6 col-lg-4 d-none d-lg-block"
+          className="col-6 col-sm-4 d-none d-sm-block"
           style={{ ...stylesheet.menu, textAlign: "right" }}
         >
           <Button label={"TOP SONGS"} src={"/spotify/top-50"} />
@@ -96,7 +94,7 @@ function App(props) {
 
         {/* MOBILE VERSION - TEXT ALIGN LEFT */}
         <div
-          className="col-md-6 col-lg-4  d-lg-none"
+          className="col-6 col-sm-4  d-sm-none"
           style={{
             ...stylesheet.menu,
             textAlign: "left",
@@ -107,20 +105,20 @@ function App(props) {
 
         {/* DESKTOP VERSION - TEXT ALIGN CENTER */}
         <div
-          className="col-md-6 col-lg-4 text-center d-none d-lg-block"
+          className="col-6 col-sm-4 text-center d-none d-sm-block"
           style={stylesheet.menu}
         >
           <Button label={"RECENTLY PLAYED"} src={"/spotify/recently-played"} />
         </div>
 
         {/* MOBILE VERSION - TEXT ALIGN CENTER IN A NEW ROW */}
-        <div className="col-md-12 col-lg-4 d-lg-none" style={stylesheet.menu}>
+        <div className="col-12 col-sm-4 d-sm-none" style={stylesheet.menu}>
           <Profile user={props.user} />
         </div>
 
         {/* DESKTOP VERSION - TEXT ALIGN RIGHT IN SAME ROW */}
         <div
-          className="col-md-12 col-lg-4 d-none d-lg-block"
+          className="col-6 col-sm-4 d-none d-sm-block"
           style={stylesheet.menu}
         >
           <Profile
@@ -141,7 +139,7 @@ function App(props) {
         </div>
 
         {highlightedTimeRange && (
-          <div className="row" style={stylesheet.timeRangeRow}>
+          <div className="row">
             <div className="col">
               <div className="text-center">
                 <a
@@ -165,7 +163,7 @@ function App(props) {
                     fontFamily: fontFamilyMediumTerm,
                   }}
                 >
-                  LAST 6 MONTHS
+                  6 MONTHS
                 </a>
               </div>
             </div>
@@ -178,7 +176,7 @@ function App(props) {
                     fontFamily: fontFamilyShortTerm,
                   }}
                 >
-                  LAST 4 WEEKS
+                  4 WEEKS
                 </a>
               </div>
             </div>
@@ -203,17 +201,14 @@ function App(props) {
           props.tracks.map((track, index) => (
             <div className="row" key={index}>
               <div className="col">
-                <div className="card mb-3" style={stylesheet.card}>
+                <div className="card" style={stylesheet.card}>
                   <div className="row g-0">
-                    <div
-                      className="col-md-1"
-                      style={stylesheet.cardBodyRanking}
-                    >
+                    <div className="col-1" style={stylesheet.cardBodyRanking}>
                       <div style={stylesheet.cardBodyHorizontalAlign}>
                         {index + 1}
                       </div>
                     </div>
-                    <div className="col-md-1">
+                    <div className="col-1">
                       <img
                         className="img-fluid"
                         src={track.image.url}
@@ -221,11 +216,16 @@ function App(props) {
                         height={"auto"}
                       />
                     </div>
-                    <div className="col-md-10">
+                    <div className="col-10">
                       <div className="card-body" style={stylesheet.cardBody}>
-                        <h5 className="card-title" style={stylesheet.cardTitle}>
-                          {track.name}
-                        </h5>
+                        <div>
+                          <h6
+                            className="card-title"
+                            style={stylesheet.cardTitle}
+                          >
+                            {track.name}
+                          </h6>
+                        </div>
                       </div>
                     </div>
                   </div>

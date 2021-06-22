@@ -8,6 +8,7 @@ const stylesheet = {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    fontSize: "14px",
   },
   horizontalAlign: {
     display: "flex",

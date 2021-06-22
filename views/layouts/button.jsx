@@ -7,6 +7,7 @@ const stylesheet = {
     color: "#04E553",
     fontFamily: "'Gotham Light', sans-serif",
     borderRadius: "1rem",
+    fontSize: "12px",
   },
 };
 
