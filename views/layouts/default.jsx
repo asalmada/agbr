@@ -19,11 +19,15 @@ const stylesheet = {
     width: "100%",
     justifyContent: "center",
     icon: {
-      padding: ".4rem",
+      paddingRight: ".4rem",
     },
   },
   footer: {
-    marginTop: "1rem",
+    color: "#797979",
+  },
+  footerLink: {
+    color: "inherit",
+    textDecoration: "none",
   },
 };
 
@@ -31,12 +35,13 @@ function DefaultLayout(props) {
   return (
     <html>
       <head>
+        <link rel="icon" type="image/png" href="/images/favicon.png" />
         <link href="/style/style.css" rel="stylesheet" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link
           rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
         />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>My Ariana Stats - Powered by AGBR</title>
       </head>
       <body style={stylesheet.body}>
@@ -50,13 +55,79 @@ function DefaultLayout(props) {
           <div className="row">
             <div className="col">{props.children}</div>
           </div>
-          <div className="row" style={stylesheet.footer}>
+          <div
+            className="row"
+            style={{ ...stylesheet.footer, marginTop: "1rem" }}
+          >
             <div className="col text-center">
-              Developed by André Almada | Design by André Rodrigues
+              <a href="/" target="_blank" style={stylesheet.footerLink}>
+                <i class="bi bi-link-45deg" style={{ margin: "0 .5rem" }}></i>
+              </a>
+              <a
+                href="https://github.com/asalmada/agbr"
+                target="_blank"
+                style={stylesheet.footerLink}
+              >
+                <i class="bi bi-github" style={{ margin: "0 .5rem" }}></i>
+              </a>
+              <a
+                href="https://twitter.com/arianagrandebr"
+                target="_blank"
+                style={stylesheet.footerLink}
+              >
+                <i class="bi bi-twitter" style={{ margin: "0 .5rem" }}></i>
+              </a>
             </div>
           </div>
-          <div className="row">
-            <div className="col text-center">Part of Ariana Grande Brasil</div>
+          <div className="row" style={stylesheet.footer}>
+            <div className="col text-center">
+              Developed by{" "}
+              <a
+                href="https://github.com/asalmada"
+                target="_blank"
+                style={stylesheet.footerLink}
+              >
+                André Almada
+              </a>{" "}
+              | Design by{" "}
+              <a
+                href="mailto:andrerodriguex@gmail.com"
+                style={stylesheet.footerLink}
+              >
+                André Rodrigues
+              </a>
+            </div>
+          </div>
+          <div className="row" style={stylesheet.footer}>
+            <div className="col text-center">
+              Part of{" "}
+              <a
+                href="https://arianagrandebrasil.com"
+                target="_blank"
+                style={stylesheet.footerLink}
+              >
+                Ariana Grande Brasil
+              </a>
+            </div>
+          </div>
+          <div className="row" style={stylesheet.footer}>
+            <div className="col text-center">
+              <a
+                href="/privacy-policy"
+                target="_blank"
+                style={stylesheet.footerLink}
+              >
+                About Us & Privacy Policy
+              </a>{" "}
+              |{" "}
+              <a
+                href="/privacy-policy"
+                target="_blank"
+                style={stylesheet.footerLink}
+              >
+                Sobre Nós e Política de Privacidade
+              </a>
+            </div>
           </div>
         </div>
         <link

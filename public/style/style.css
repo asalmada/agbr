@@ -109,12 +109,10 @@
     url("https://fonts.cdnfonts.com/s/14898/Gotham-XLight.woff") format("woff");
 }
 @font-face {
-  font-family: "Gotham Book";
-  font-style: italic;
-  font-weight: 500;
-  src: local("Gotham Book"),
-    url("https://fonts.cdnfonts.com/s/14898/Gotham-BookItalic.woff")
-      format("woff");
+  font-family: 'Gotham Book';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Gotham Book'), url('https://fonts.cdnfonts.com/s/13925/GOTHAMBOOK.woff') format('woff');
 }
 @font-face {
   font-family: "Gotham Thin";

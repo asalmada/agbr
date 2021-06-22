@@ -13,8 +13,8 @@ const stylesheet = {
   card: {
     backgroundColor: "#181717",
     color: "white",
-    borderTop: "1px solid white",
-    borderBottom: "1px solid white",
+    borderTop: "1px solid #ffffff57",
+    borderBottom: "1px solid #ffffff57",
     marginTop: "1rem",
   },
   cardBodyRanking: {
