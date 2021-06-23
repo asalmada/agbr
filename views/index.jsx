@@ -43,7 +43,7 @@ function Home(props) {
         <p style={stylesheet.description}>
           Login with your Spotify account to find out your most played Ariana
           Grande songs under your Top 50 tracks in the last four weeks, 6 months
-          or all time!
+          or of all time!
         </p>
         <p style={stylesheet.description}>
           Faça login com a sua conta do Spotify para descobrir suas músicas mais

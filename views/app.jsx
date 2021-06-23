@@ -48,6 +48,13 @@ const stylesheet = {
     textDecorationLine: "underline",
     textUnderlineOffset: "2px",
   },
+  noTracksFound: {
+    border: "1px solid #04E553",
+    margin: "2rem 0",
+    padding: "1rem",
+    borderRadius: "1.25rem",
+    fontSize: "14px",
+  },
 };
 
 function App(props) {
@@ -183,20 +190,34 @@ function App(props) {
           </div>
         )}
 
+        {/* NO TRACKS FOUND */}
         {props.tracks.length === 0 && (
-          <div className="row">
-            <div className="col">
-              <p className="text-center">
+          <div className="row" style={stylesheet.noTracksFound}>
+            <div className="col-sm-12 col-md-6 text-center">
+              <p style={{ fontWeight: "bold" }}>NO TRACKS FOUND</p>
+              <p>
                 Sorry, it looks like you did not listen so much Ariana Grande
                 songs in the selected period of time.
               </p>
-              <p className="text-center">
+              <p>
                 Select another period of time or listen more to Ariana Grande
                 songs!
               </p>
             </div>
+            <div className="col-sm-12 col-md-6 text-center">
+              <p style={{ fontWeight: "bold" }}>NENHUMA MÚSICA ENCONTRADA</p>
+              <p>
+                Sinto muito, parece que você não ouviu muitas músicas da Ariana
+                Grande no período de tempo selecionado.
+              </p>
+              <p>
+                Selecione outro período de tempo ou ouça mais músicas da Ariana
+                Grande!
+              </p>
+            </div>
           </div>
         )}
+
         {props.tracks.length > 0 &&
           props.tracks.map((track, index) => (
             <div className="row" key={index}>

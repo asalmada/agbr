@@ -41,7 +41,18 @@ function DefaultLayout(props) {
           rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
         />
+        <meta charset="UTF-8" />
+        <meta
+          name="keywords"
+          content="Ariana Grande, Songs, Spotify, Top 50, Recently Played"
+        />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="robots" content="index,follow" />
+        <meta
+          name="description"
+          content="Discover your most played Ariana Grande songs recently or in the last four weeks, 6 months
+          or of all time!"
+        />
         <title>My Ariana Stats - Powered by AGBR</title>
       </head>
       <body style={stylesheet.body}>
