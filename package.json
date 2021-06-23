@@ -1,6 +1,15 @@
 {
-  "name": "agbr",
-  "version": "0.0.0",
+  "name": "my-ariana-stats",
+  "version": "1.0.0",
+  "description": "Discover your most played Ariana Grande songs recently or in the last four weeks, 6 months or of all time",
+  "keywords": ["Ariana Grande", "Songs", "Spotify", "Top 50", "Recently Played"],
+  "homepage": "https://my-ariana-stats.mybluemix.net/",
+  "license" : "GPL-3.0",
+  "author": "André Scheibel de Almada <andre@asalmada.dev> (https://github.com/asalmada/)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/asalmada/agbr"
+  },
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
